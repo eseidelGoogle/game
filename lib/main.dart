@@ -97,7 +97,7 @@ main() async {
 }
 
 class GameRoute extends PageRoute {
-  GameRoute(this.builder);
+  GameRoute(this.builder, RouteSettings settings) : super(settings: settings);
   final WidgetBuilder builder;
   Duration get transitionDuration => const Duration(milliseconds: 1000);
   Color get barrierColor => null;
@@ -156,11 +156,7 @@ class GameDemoState extends State<GameDemo> with WidgetsBindingObserver {
   GlobalKey<NavigatorState> _navigatorKey = new GlobalKey<NavigatorState>();
 
   bool didPopRoute() {
-    bool result = true;
-    _navigatorKey.currentState.openTransaction((NavigatorTransaction transaction) {
-      result = transaction.pop();
-    });
-    return result;
+    return _navigatorKey.currentState.pop();
   }
 
   Widget build(BuildContext context) {
@@ -172,8 +168,8 @@ class GameDemoState extends State<GameDemo> with WidgetsBindingObserver {
           key: _navigatorKey,
           onGenerateRoute: (RouteSettings settings) {
             switch (settings.name) {
-              case '/game': return _buildGameSceneRoute();
-              default: return _buildMainSceneRoute();
+              case '/game': return _buildGameSceneRoute(settings);
+              default: return _buildMainSceneRoute(settings);
             }
           }
         )
@@ -181,7 +177,7 @@ class GameDemoState extends State<GameDemo> with WidgetsBindingObserver {
     );
   }
 
-  GameRoute _buildGameSceneRoute() {
+  GameRoute _buildGameSceneRoute(RouteSettings settings) {
     return new GameRoute((BuildContext context) {
       return new GameScene(
         onGameOver: (int lastScore, int coins, int levelReached) {
@@ -193,10 +189,10 @@ class GameDemoState extends State<GameDemo> with WidgetsBindingObserver {
         },
         gameState: _gameState
       );
-    });
+    }, settings);
   }
 
-  GameRoute _buildMainSceneRoute() {
+  GameRoute _buildMainSceneRoute(RouteSettings settings) {
     return new GameRoute((BuildContext context) {
       return new MainScene(
         gameState: _gameState,
@@ -229,7 +225,7 @@ class GameDemoState extends State<GameDemo> with WidgetsBindingObserver {
           });
         }
       );
-    });
+    }, settings);
   }
 }
 
