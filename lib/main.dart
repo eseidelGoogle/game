@@ -163,7 +163,7 @@ class GameDemoState extends State<GameDemo> with WidgetsBindingObserver {
     return new CheckedModeBanner(
       child: new Title(
         title: 'Space Blast',
-        color: const Color(0xFF9900FF),
+        color: const Color(0x1E155A), // Picked to match starfield.
         child: new Navigator(
           key: _navigatorKey,
           onGenerateRoute: (RouteSettings settings) {
