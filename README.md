@@ -5,7 +5,7 @@ Demo game for Flutter and Flutter Sprites.
 The objectives for this game include:
 
 * Prove that Flutter's performance is fast.
-* Prove that Flutter's widget system is versatle.
+* Prove that Flutter's widget system is versatile.
 * Prove that Flutter's feature set is rich and capable.
 
 This game is very much a work in progress. If you have any
